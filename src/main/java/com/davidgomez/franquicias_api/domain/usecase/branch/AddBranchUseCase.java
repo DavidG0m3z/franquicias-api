@@ -1,22 +1,17 @@
-package com.davidgomez.franquicias_api.domain.usecases.branch;
+package com.davidgomez.franquicias_api.domain.usecase.branch;
 
 import com.davidgomez.franquicias_api.domain.exception.NotFoundException;
 import com.davidgomez.franquicias_api.domain.model.branch.Branch;
 import com.davidgomez.franquicias_api.domain.model.branch.gateways.BranchRepository;
 import com.davidgomez.franquicias_api.domain.model.franchise.gateways.FranchiseRepository;
+import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
-
 import java.util.UUID;
 
+@RequiredArgsConstructor
 public class AddBranchUseCase {
-
     private final BranchRepository branchRepository;
     private final FranchiseRepository franchiseRepository;
-
-    public AddBranchUseCase(BranchRepository branchRepository, FranchiseRepository franchiseRepository){
-        this.branchRepository = branchRepository;
-        this.franchiseRepository = franchiseRepository;
-    }
 
     public Mono<Branch> execute(String franchiseId, String branchName) {
         return franchiseRepository.findById(franchiseId)
@@ -26,5 +21,4 @@ public class AddBranchUseCase {
                    return branchRepository.save(branch);
                 });
     }
-
 }

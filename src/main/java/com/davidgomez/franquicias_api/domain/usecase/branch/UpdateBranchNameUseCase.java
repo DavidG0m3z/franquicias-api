@@ -1,18 +1,14 @@
-package com.davidgomez.franquicias_api.domain.usecases.branch;
+package com.davidgomez.franquicias_api.domain.usecase.branch;
 
 import com.davidgomez.franquicias_api.domain.exception.NotFoundException;
 import com.davidgomez.franquicias_api.domain.model.branch.Branch;
 import com.davidgomez.franquicias_api.domain.model.branch.gateways.BranchRepository;
-import com.davidgomez.franquicias_api.domain.usecases.franchise.UpdateFranchiseNameUseCase;
+import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
+@RequiredArgsConstructor
 public class UpdateBranchNameUseCase {
-
     private final BranchRepository branchRepository;
-
-    public UpdateBranchNameUseCase(BranchRepository branchRepository){
-        this.branchRepository = branchRepository;
-    }
 
     public Mono<Branch> execute(String branchId, String newName) {
         return branchRepository.findById(branchId)
@@ -20,5 +16,4 @@ public class UpdateBranchNameUseCase {
                 .map(branch -> branch.withName(newName))
                 .flatMap(branchRepository :: save);
     }
-
 }
