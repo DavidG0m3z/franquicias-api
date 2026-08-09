@@ -5,7 +5,6 @@ import com.davidgomez.franquicias_api.domain.model.product.gateways.ProductRepos
 import com.davidgomez.franquicias_api.infrastructure.drivenadapters.mongorepository.document.ProductDocument;
 import com.davidgomez.franquicias_api.infrastructure.drivenadapters.mongorepository.repository.ProductMongoRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.mongodb.core.ReactiveFluentMongoOperations;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -15,7 +14,6 @@ import reactor.core.publisher.Mono;
 public class ProductRepositoryAdapter implements ProductRepository {
 
     private final ProductMongoRepository mongoRepository;
-    private final ReactiveFluentMongoOperations reactiveFluentMongoOperations;
 
     @Override
     public Mono<Product> save(Product product){
@@ -40,11 +38,12 @@ public class ProductRepositoryAdapter implements ProductRepository {
                 .map(this::toDomain);
     }
 
+    @Override
     public Mono<Product> findFirstByBranchIdOrderByStockDesc(String branchId){
         return mongoRepository.findFirstByBranchIdOrderByStockDesc(branchId)
                 .map(this::toDomain);
     }
-    
+
     private ProductDocument toDocument(Product product){
         return new ProductDocument(product.id(), product.name(), product.stock(), product.branchId());
     }
