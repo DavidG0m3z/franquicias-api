@@ -18,7 +18,7 @@ public class TopStockProductPerBranchUseCase {
     }
 
     private Mono<ProductByBranch> topProductPerBranch(Branch branch) {
-        return productRepository.findTopProductStockByBranchId(branch.id())
+        return productRepository.findFirstByBranchIdOrderByStockDesc(branch.id())
                 .map(product -> new ProductByBranch(
                         branch.id(),
                         branch.name(),

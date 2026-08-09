@@ -9,5 +9,5 @@ public interface ProductRepository {
     Mono<Product> findById(String Id);
     Mono<Void> deleteById(String Id);
     Flux<Product> findByBranchId(String BranchId);
-    Mono<Product> findTopProductStockByBranchId(String branchId);
+    Mono<Product> findFirstByBranchIdOrderByStockDesc(String branchId);
 }
