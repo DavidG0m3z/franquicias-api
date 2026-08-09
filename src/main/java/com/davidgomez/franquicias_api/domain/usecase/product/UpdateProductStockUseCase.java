@@ -12,7 +12,7 @@ public class UpdateProductStockUseCase {
 
     public Mono<Product> execute(String productId, Integer newStock) {
         return productRepository.findById(productId)
-                .switchIfEmpty(Mono.error(new NotFoundException("Product not found")))
+                .switchIfEmpty(Mono.error(new NotFoundException("Product not found " + productId)))
                 .map(product -> product.withStock(newStock))
                 .flatMap(productRepository :: save);
     }
