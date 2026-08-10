@@ -14,3 +14,9 @@ variable "db_password" {
   type        = string
   sensitive   = true
 }
+
+variable "docker_image_tag" {
+  description = "Tag de la imagen en ECR a desplegar"
+  type        = string
+  default     = "latest"
+}

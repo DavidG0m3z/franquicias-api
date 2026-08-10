@@ -1,0 +1,343 @@
+{
+  "info": {
+    "_postman_id": "c802925d-1574-41bf-ad4f-d920264ada5a",
+    "name": "Franquicias API",
+    "description": "Colección de pruebas para la API de Franquicias. Ejecutar los requests en orden: cada creación guarda el id devuelto como variable de entorno (franchise_id, branch_id, product_id, product_id_2), usada por los siguientes requests.Configurar la variable `base_url` en tu environment antes de correr (por ejemplo http://localhost:8080 en local, o la URL desplegada en AWS)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "33754532"
+  },
+  "item": [
+    {
+      "name": "Crear franquicia",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.environment.set(\"franchise_id\", pm.response.json().id);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"name\": \"Franquicia Demo\" }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/franchises",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "franchises"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Crear sucursal",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.environment.set(\"branch_id\", pm.response.json().id);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"name\": \"Sucursal Centro\" }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/franchises/{{franchise_id}}/branches",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "franchises",
+            "{{franchise_id}}",
+            "branches"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Crear producto A",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.environment.set(\"product_id\", pm.response.json().id);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"name\": \"Producto A\", \"stock\": 10 }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/branches/{{branch_id}}/products",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "branches",
+            "{{branch_id}}",
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Crear producto B",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.environment.set(\"product_id_2\", pm.response.json().id);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"name\": \"Producto B\", \"stock\": 50 }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/branches/{{branch_id}}/products",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "branches",
+            "{{branch_id}}",
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Actualizar Stock",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"stock\": 100 }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/products/{{product_id}}/stock",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "products",
+            "{{product_id}}",
+            "stock"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Top productos por sucursal",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/franchises/{{franchise_id}}/top-stock-products",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "franchises",
+            "{{franchise_id}}",
+            "top-stock-products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Eliminar producto B",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/products/{{product_id_2}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "products",
+            "{{product_id_2}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Actualizar nombre de la franquicia",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"name\": \"Franquicia Demo Actualizada\" }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/franchises/{{franchise_id}}/name",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "franchises",
+            "{{franchise_id}}",
+            "name"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Actualizar nombre de la sucursal",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"name\": \"Sucursal Centro Actualizada\" }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/branches/{{branch_id}}/name",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "branches",
+            "{{branch_id}}",
+            "name"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Actualizar nombre del producto",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"name\": \"Producto A Actualizado\" }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/products/{{product_id}}/name",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "products",
+            "{{product_id}}",
+            "name"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": []
+}
