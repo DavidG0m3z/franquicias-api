@@ -21,7 +21,7 @@ public class AddBranchUseCaseTest {
     @Test
     void shouldAddBranchSuccessfully() {
         String franchiseId = "franchise-1";
-        when(franchiseRepository.findById(franchiseId)).thenReturn(Mono.just(new Franchise(franchiseId, "McDonald's")));
+        when(franchiseRepository.findById(franchiseId)).thenReturn(Mono.just(new Franchise(franchiseId, "Cueros Velez")));
         when(branchRepository.save(any(Branch.class))).thenAnswer(invocationOnMock -> Mono.just(invocationOnMock.getArgument(0)));
 
         Mono<Branch> result = addBranchUseCase.execute(franchiseId, "Sede Centro");

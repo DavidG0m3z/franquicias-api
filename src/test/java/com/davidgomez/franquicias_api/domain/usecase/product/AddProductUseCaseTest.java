@@ -23,10 +23,10 @@ public class AddProductUseCaseTest {
         when(branchRepository.findById(branchId)).thenReturn(Mono.just(new Branch(branchId, "Sede Centro", "franchise-1")));
         when(productRepository.save(any(Product.class))).thenAnswer(invocationOnMock -> Mono.just(invocationOnMock.getArgument(0)));
 
-        Mono<Product> result = addProductUseCase.execute(branchId, "Big Mac", 50);
+        Mono<Product> result = addProductUseCase.execute(branchId, "Chaqueta Cuero", 50);
 
         StepVerifier.create(result)
-                .expectNextMatches(product -> product.id() != null && product.name().equals("Big Mac") && product.stock() == 50 && product.branchId().equals(branchId))
+                .expectNextMatches(product -> product.id() != null && product.name().equals("Chaqueta Cuero") && product.stock() == 50 && product.branchId().equals(branchId))
                 .verifyComplete();
     }
 }

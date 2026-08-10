@@ -1,4 +1,3 @@
-
 services:
    mongo:
      image: mongo:7
@@ -7,6 +6,16 @@ services:
        - "27017:27017"
      volumes:
        - mongo_data:/data/db
+
+   api:
+     build: .
+     container_name: franquicias-api
+     ports:
+       - "8080:8080"
+     environment:
+       SPRING_MONGODB_URI: mongodb://mongo:27017/franquicias
+     depends_on:
+       - mongo
 
 volumes:
   mongo_data:

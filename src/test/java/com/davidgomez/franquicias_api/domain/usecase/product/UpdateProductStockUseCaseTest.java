@@ -17,7 +17,7 @@ public class UpdateProductStockUseCaseTest {
 
     @Test
     void shouldUpdateProductStockSuccessully() {
-        Product exist = new Product("product-1", "Big Mac", 50, "branch-1");
+        Product exist = new Product("product-1", "Chaqueta Cuero", 50, "branch-1");
         when(productRepository.findById("product-1")).thenReturn(Mono.just(exist));
         when(productRepository.save(any(Product.class))).thenAnswer(invocationOnMock -> Mono.just(invocationOnMock.getArgument(0)));
 

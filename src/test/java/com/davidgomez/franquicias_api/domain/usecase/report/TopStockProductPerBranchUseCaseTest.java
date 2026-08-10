@@ -30,12 +30,12 @@ public class TopStockProductPerBranchUseCaseTest {
                 .thenReturn(Flux.just(branch1, branch2));
         when(productRepository.findFirstByBranchIdOrderByStockDesc("branch-1")).thenReturn(Mono.just(new Product(
                 "product-1",
-                "Big Mac",
+                "Chaqueta Cuero",
                 100,
                 "branch-1")));
         when(productRepository.findFirstByBranchIdOrderByStockDesc("branch-2")).thenReturn(Mono.just(new Product(
                 "product-2",
-                "McNuggets",
+                "Camisa Lino",
                 80,
                 "branch-2")));
 
@@ -45,8 +45,8 @@ public class TopStockProductPerBranchUseCaseTest {
         StepVerifier.create(result)
                 .expectNextMatches(list ->
                         list.size() == 2
-                                && list.stream().anyMatch(p -> p.branchId().equals("branch-1") && p.productName().equals("Big Mac"))
-                                && list.stream().anyMatch(p -> p.branchId().equals("branch-2") && p.productName().equals("McNuggets")))
+                                && list.stream().anyMatch(p -> p.branchId().equals("branch-1") && p.productName().equals("Chaqueta Cuero"))
+                                && list.stream().anyMatch(p -> p.branchId().equals("branch-2") && p.productName().equals("Camisa Lino")))
                 .verifyComplete();
     }
 }

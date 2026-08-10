@@ -17,7 +17,7 @@ public class CreateFranchiseUseCaseTest {
 
     @Test
     void shouldCreateFranchiseSuccessfully() {
-        String name = "McDonald`s";
+        String name = "Cueros Velez";
         when(franchiseRepository.save(any(Franchise.class)))
                 .thenAnswer(invocationOnMock -> Mono.just((invocationOnMock.getArgument(0))));
 

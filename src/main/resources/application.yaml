@@ -1,6 +1,5 @@
 spring:
   application:
     name: franquicias-api
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/franquicias
+  mongodb:
+    uri: mongodb://localhost:27017/franquicias
