@@ -17,15 +17,15 @@ public class UpdateFranchiseNameUseCaseTest {
 
     @Test
     void shouldUpdateFranchiseNameSuccessfully() {
-        Franchise exist = new Franchise("franchise-1", "McDonald`s");
+        Franchise exist = new Franchise("franchise-1", "Cueros Velez");
         when(franchiseRepository.findById("franchise-1")).thenReturn(Mono.just(exist));
         when(franchiseRepository.save(any(Franchise.class)))
                 .thenAnswer(invocationOnMock -> Mono.just(invocationOnMock.getArgument(0)));
 
-        Mono<Franchise> result = updateFranchiseNameUseCase.execute("franchise-1", "McDonald's Colombia");
+        Mono<Franchise> result = updateFranchiseNameUseCase.execute("franchise-1", "Arturo Calle");
 
         StepVerifier.create(result)
-                .expectNextMatches(franchise -> franchise.name().equals("McDonald's Colombia"))
+                .expectNextMatches(franchise -> franchise.name().equals("Arturo Calle"))
                 .verifyComplete();
 
     }

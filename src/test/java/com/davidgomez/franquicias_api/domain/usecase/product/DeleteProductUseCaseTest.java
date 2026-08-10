@@ -16,7 +16,7 @@ public class DeleteProductUseCaseTest {
     @Test
     void shouldDeleteProductSuccessfully() {
         String productId = "product-1";
-        Product exist = new Product(productId, "Big Mac", 50, "branch-1");
+        Product exist = new Product(productId, "Chaqueta Cuero", 50, "branch-1");
         when(productRepository.findById(productId)).thenReturn(Mono.just(exist));
         when(productRepository.deleteById(productId)).thenReturn(Mono.empty());
 
